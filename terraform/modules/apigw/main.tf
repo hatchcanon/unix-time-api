@@ -21,7 +21,7 @@ module "apigw" {
   integrations = {
 
     "GET /hit" = {
-      lambda_arn               = module.pythonlambda.lambda_function_arn
+      lambda_arn               = var.lambda_arn
       payload_format_version   = "2.0"
       throttling_rate_limit    = 80
       throttling_burst_limit   = 40
