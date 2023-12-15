@@ -1,14 +1,19 @@
 module "pythonlambda" {
-  source  = "terraform-module/lambda/aws"
-  version = "~> 2.0"
+  source  = "terraform-aws-modules/lambda/aws"
+  version = "~> 6.0"
 
-  description   = "this is example code"
-  filename      = "lambda_function_payload.py"
-  function_name = "python-lambda"
-  handler       = "index.handler"
-  memory_size   = 128
-  publish       = true
-  runtime       = "python3.11"
-  role_arn = "./module.iam.iam_role_arn"
-  concurrency = 5
+  create_current_version_allowed_triggers = false
+  create_role                             = true
+  description                             = "this is the python code"
+  function_name                           = var.function_name
+  handler                                 = "index.lambda_handler"
+  runtime                                 = "python3.11"
+  source_path                             = "../modules/lambda/index.py"
+
+  allowed_triggers = {
+    APIGatewayAny = {
+      service    = "apigateway"
+      source_arn = "arn:aws:execute-api:us-east-1:${var.accountId}:${var.api_id}/*/${var.http_method}${var.gateway_path}"
+    },
+  }
 }

@@ -1,31 +1,31 @@
-module "apigw" {
-  source = "terraform-aws-modules/apigateway-v2/aws"
-  version = "~> 2.0"
+resource "aws_api_gateway_rest_api" "epoch_api" {
+  name = var.apiname
+}
 
-  name          = var.apiname
-  description   = "EPOCH"
-  protocol_type = "HTTP"
+resource "aws_api_gateway_resource" "gw_resource" {
+  rest_api_id = aws_api_gateway_rest_api.epoch_api.id
+  parent_id   = aws_api_gateway_rest_api.epoch_api.root_resource_id
+  path_part   = var.path
+}
 
-  cors_configuration = {
-    allow_headers = ["content-type", "x-amz-date", "authorization", "x-api-key", "x-amz-security-token", "x-amz-user-agent"]
-    allow_methods = ["*"]
-    allow_origins = ["*"]
-  }
+resource "aws_api_gateway_method" "gw_method" {
+  rest_api_id   = aws_api_gateway_rest_api.epoch_api.id
+  resource_id   = aws_api_gateway_resource.gw_resource.id
+  http_method   = "GET"
+  authorization = "NONE"
+}
 
-  default_route_settings = {
-    detailed_metrics_enabled = true
-    throttling_burst_limit   = 100
-    throttling_rate_limit    = 100
-  }
+resource "aws_api_gateway_integration" "gw_integration" {
+  rest_api_id             = aws_api_gateway_rest_api.epoch_api.id
+  resource_id             = aws_api_gateway_resource.gw_resource.id
+  http_method             = aws_api_gateway_method.gw_method.http_method
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${var.lambda_arn}/invocations"
+}
 
-  integrations = {
-
-    "GET /hit" = {
-      lambda_arn               = var.lambda_arn
-      payload_format_version   = "2.0"
-      throttling_rate_limit    = 80
-      throttling_burst_limit   = 40
-      detailed_metrics_enabled = true
-    }
-  }
+resource "aws_api_gateway_deployment" "gw_deployment" {
+  depends_on  = [aws_api_gateway_integration.gw_integration]
+  rest_api_id = aws_api_gateway_rest_api.epoch_api.id
+  stage_name  = "prod"
 }
