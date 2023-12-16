@@ -18,3 +18,6 @@ variable "http_method" {
 variable "gateway_path" {
   type = string
 }
+variable "description" {
+  type = string
+}

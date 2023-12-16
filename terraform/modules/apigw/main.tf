@@ -1,5 +1,6 @@
 resource "aws_api_gateway_rest_api" "epoch_api" {
-  name = var.apiname
+  name        = var.apiname
+  description = var.description
 }
 
 resource "aws_api_gateway_resource" "gw_resource" {

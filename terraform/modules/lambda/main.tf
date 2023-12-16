@@ -4,7 +4,7 @@ module "pythonlambda" {
 
   create_current_version_allowed_triggers = false
   create_role                             = true
-  description                             = "this is the python code"
+  description                             = var.description
   function_name                           = var.function_name
   handler                                 = "index.lambda_handler"
   runtime                                 = "python3.11"
