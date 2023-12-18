@@ -25,7 +25,7 @@ aws eks update-kubeconfig \
   --profile yourprofile
 ```
 
-8. Once you make sure you are connected, update `time=nlb.yaml` with the image link that you had pushed earlier
+8. Once you make sure you are connected, update `kube/time-nlb.yaml` with the image link that you had pushed earlier
 Example: `image: public.ecr.aws/m4b9s1r9/time:latest`
 10. Run `kubectl apply -f kube/time-nlb.yaml`
 11. The K8S service should have created a load balancer. Now go to the AWS console to find the listener uri. https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1#LoadBalancers:
