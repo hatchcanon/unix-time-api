@@ -25,11 +25,13 @@ aws eks update-kubeconfig \
   --profile yourprofile
 ```
 
-8. Once you are connected, run `kubectl apply -f kube/time-nlb.yaml`
-9. The K8S service should have created a load balancer. Now go to the AWS console to find the listener uri. https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1#LoadBalancers:
-10. Once you have the uri, paste it into the apigw integration_uri line that you commented out earlier.
-11. Uncomment everything in step 3.
-12. Run terraform apply once more and the API should be running and connected to API Gateway.
+8. Once you make sure you are connected, update `time=nlb.yaml` with the image link that you had pushed earlier
+Example: `image: public.ecr.aws/m4b9s1r9/time:latest`
+10. Run `kubectl apply -f kube/time-nlb.yaml`
+11. The K8S service should have created a load balancer. Now go to the AWS console to find the listener uri. https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1#LoadBalancers:
+12. Once you have the uri, paste it into the apigw integration_uri line that you commented out earlier.
+13. Uncomment everything in step 3.
+14. Run terraform apply once more and the API should be running and connected to API Gateway.
 
 At this point, the endpoint should be outputted to the console. You may curl it now. If the response is a server error, that means the load balancer has not finished provisioning. Give it a couple minutes and it will be complete.
 
