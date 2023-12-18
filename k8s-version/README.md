@@ -1,20 +1,13 @@
 # ontra-api
 
 ## Introduction
-This version is the final version with kubernetes.
+This version is the final version with kubernetes. This uses EKS Managed Node Groups, VPC with public and private subnets, IAM role for kubectl, ECR for image repo, and API Gateway to expose the API.
 
 ## Tools
 * Terraform v1.6
 * AWS CLI v2
 * Docker CLI
 * kubectl
-
-## Services used
-* VPC
-* EKS
-* IAM
-* ECR
-* APIGW
 
 ## Instructions
 1. Under terraform/ecr/main.tf, please put the arn of an AWS user that has administrative access so you can push the docker image.
