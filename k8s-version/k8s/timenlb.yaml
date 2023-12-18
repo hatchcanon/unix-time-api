@@ -2,28 +2,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: echoserver
+  name: epoch-time-api
   namespace: default
 spec:
   selector:
     matchLabels:
-      app: echoserver
+      app: epoch-time-api
   replicas: 1
   template:
     metadata:
       labels:
-        app: echoserver
+        app: epoch-time-api
     spec:
       containers:
-      - image: k8s.gcr.io/e2e-test-images/echoserver:2.5
-        name: echoserver
+      - image: public.ecr.aws/m4b9s1r9/time:latest
+        name: epoch-time-api
         ports:
-        - containerPort: 8080
+        - containerPort: 5000
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: echoserver
+  name: epoch-time-api
   namespace: default
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: nlb
@@ -32,7 +32,8 @@ metadata:
 spec:
   ports:
   - port: 8080
+    targetPort: 5000
     protocol: TCP
   type: LoadBalancer
   selector:
-    app: echoserver
+    app: epoch-time-api
