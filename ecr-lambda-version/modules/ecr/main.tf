@@ -1,7 +1,7 @@
 module "private_ecr" {
   source = "terraform-aws-modules/ecr/aws"
 
-  repository_name = "lambda-time"
+  repository_name = var.repository_name
   repository_type = "private"
 
   repository_read_write_access_arns = [

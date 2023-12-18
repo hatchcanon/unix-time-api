@@ -3,7 +3,7 @@
 ## Introduction
 This version is the final version with kubernetes.
 
-## Requirements
+## Tools
 * Terraform v1.6
 * AWS CLI v2
 * Docker CLI
@@ -39,3 +39,33 @@ aws eks update-kubeconfig \
 12. Run terraform apply once more and the API should be running and connected to API Gateway.
 
 At this point, the endpoint should be outputted to the console. You may curl it now. If the response is a server error, that means the load balancer has not finished provisioning. Give it a couple minutes and it will be complete.
+
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.6.6 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.57 |
+| <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | >= 1.14.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.57 |
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_apigw"></a> [apigw](#module\_apigw) | ../modules/apigw | n/a |
+| <a name="module_ecr"></a> [ecr](#module\_ecr) | ../modules/ecr | n/a |
+| <a name="module_eks"></a> [eks](#module\_eks) | ../modules/eks | n/a |
+| <a name="module_iam"></a> [iam](#module\_iam) | ../modules/iam | n/a |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | ../modules/vpc | n/a |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_invoke_url"></a> [invoke\_url](#output\_invoke\_url) | API URL |

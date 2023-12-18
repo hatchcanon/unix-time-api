@@ -3,7 +3,7 @@
 ## Introduction
 This version technically fulfills all requirements of completing the API while containerizing the code. It accomplishes this similiarly to the lambda version with the exception of the lambda package being an image instead of a zip file.
 
-## Requirements
+## Tools
 * Terraform v1.6
 * AWS CLI v2
 * Docker CLI
@@ -25,3 +25,24 @@ This insures that the code is modular and is easily readable. Written according 
 
 To find the API endpoint, it should be under API gateway under the prod stage.
 Ex: https://example.execute-api.us-east-1.amazonaws.com/prod/epoch-time
+
+
+## Requirements
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.6.6 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.57 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.57 |
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_apigw"></a> [apigw](#module\_apigw) | ../modules/apigw | n/a |
+| <a name="module_lambda"></a> [lambda](#module\_lambda) | ../modules/lambda | n/a |
+| <a name="module_ecr"></a> [ecr](#module\_ecr) | ../modules/ecr | n/a |

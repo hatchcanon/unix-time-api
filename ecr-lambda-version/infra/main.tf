@@ -17,3 +17,8 @@ module "lambda" {
   source        = "../modules/lambda"
   image_uri     = ""
 }
+
+module "ecr" {
+  source = "../modules/ecr"
+  repository_name = "lambda-time"
+}
