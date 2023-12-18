@@ -5,8 +5,8 @@ module "public_ecr" {
   repository_type = "public"
 
   repository_read_write_access_arns = [
-    "arn:aws:iam::${module.vpc.vpc_owner_id}:root",
-    "arn:aws:iam::${module.vpc.vpc_owner_id}:user/nathan"
+    "arn:aws:iam::${var.vpc_owner_id}:root",
+    "arn:aws:iam::${var.vpc_owner_id}:user/nathan"
   ]
   repository_lifecycle_policy = jsonencode({
     rules = [

@@ -8,10 +8,6 @@ terraform {
       source  = "gavinbunney/kubectl"
       version = ">= 1.14.0"
     }
-    helm = {
-      source  = "hashicorp/helm"
-      version = ">= 2.12.1"
-    }
   }
 
   required_version = "~> 1.0"

@@ -6,8 +6,8 @@ module "pythonlambda" {
   create_role                             = true
   description                             = var.description
   function_name                           = var.function_name
-  package_type = Image
-  image_uri = var.image_uri
+  package_type                            = Image
+  image_uri                               = var.image_uri
   allowed_triggers = {
     APIGatewayAny = {
       service    = "apigateway"

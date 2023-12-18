@@ -15,5 +15,5 @@ module "lambda" {
   http_method   = module.apigw.http_method
   role_arn      = "lambda-apigw-perms"
   source        = "../modules/lambda"
-  image_uri = ""
+  image_uri     = ""
 }

@@ -2,8 +2,8 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.4.0"
 
-  name = "main"
-  cidr = "10.0.0.0/16"
+  name = var.name
+  cidr = var.cidr
 
   azs             = ["us-east-1a", "us-east-1b"]
   private_subnets = ["10.0.0.0/24", "10.0.1.0/24"]
@@ -26,8 +26,4 @@ module "vpc" {
   tags = {
     Environment = "prod"
   }
-}
-
-output "vpc_id" {
-  value = module.vpc.default_vpc_id
 }

@@ -2,14 +2,14 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.21.0"
 
-  cluster_name    = "my-eks"
-  cluster_version = "1.28"
+  cluster_name    = var.cluster_name
+  cluster_version = var.cluster_version
 
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = true
 
-  vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.vpc.private_subnets
+  vpc_id     = var.vpc_id
+  subnet_ids = var.vpc_private_subnets
 
   enable_irsa = true
 
@@ -54,8 +54,8 @@ module "eks" {
   manage_aws_auth_configmap = true
   aws_auth_roles = [
     {
-      rolearn  = module.eks_admins_iam_role.iam_role_arn
-      username = module.eks_admins_iam_role.iam_role_name
+      rolearn  = var.eks_admins_iam_role
+      username = var.eks_admins_iam_name
       groups   = ["system:masters"]
     },
   ]
@@ -66,17 +66,28 @@ module "eks" {
 }
 
 # https://github.com/terraform-aws-modules/terraform-aws-eks/issues/2009
-data "aws_eks_cluster" "default" {
-  name = module.eks.cluster_name
-}
+# this worked when it wasn't under a module????
+# data "aws_eks_cluster" "default" {
+#   name = module.eks.cluster_name
+# }
+# provider "kubernetes" {
+#   host                   = data.aws_eks_cluster.default.endpoint
+#   cluster_ca_certificate = base64decode(data.aws_eks_cluster.default.certificate_authority[0].data)
+
+#   exec {
+#     api_version = "client.authentication.k8s.io/v1beta1"
+#     args        = ["eks", "get-token", "--cluster-name", data.aws_eks_cluster.default.id]
+#     command     = "aws"
+#   }
+# }
 
 provider "kubernetes" {
-  host                   = data.aws_eks_cluster.default.endpoint
-  cluster_ca_certificate = base64decode(data.aws_eks_cluster.default.certificate_authority[0].data)
+  host                   = module.eks.cluster_endpoint
+  cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
 
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"
-    args        = ["eks", "get-token", "--cluster-name", data.aws_eks_cluster.default.id]
+    args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
     command     = "aws"
   }
 }
