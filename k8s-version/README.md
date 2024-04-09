@@ -1,7 +1,7 @@
-# ontra-api
+# unix-time-api
 
 ## Introduction
-This version is the final version with kubernetes. This uses EKS Managed Node Groups, VPC with public and private subnets, IAM role for kubectl, ECR for image repo, and API Gateway to expose the API.
+This version uses EKS Managed Node Groups, VPC with public and private subnets, IAM role for kubectl, ECR for image repo, and API Gateway to expose the API.
 
 ## Tools
 * Terraform v1.6

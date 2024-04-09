@@ -1,10 +1,14 @@
-# ontra-api
-![logo](https://www.ontra.ai/wp-content/themes/ontra/images/logo-new.svg)
+# unix-time-api
 ## Introduction
-This is the repo for the Exercise: Infrastructure and Code for an API Endpoint. I originally started with pure lambda and then it got more and more complex.
+This repo is a demonstration for a API that returns the epoch time. Originally created for a take home interview, I took too much time on it for it to go to waste.
+This API endpoint responds to HTTP GET requests and returns a JSON payload.
+Tools used include
+* Terraform
+* kubectl
+* Docker
 
 ## Components
-There are 3 versions here. Each have their own README that will go into more detail.
-* [Lambda Version](lambda-version/README.md) - fully automated but no container image
-* [ECR Version](ecr-lambda-version/README.md) - requires some manual process with the image push
-* [Kubernetes Version](k8s-version/README.md) - requires some manual process along with kubectl
+There are 3 versions here
+* [Lambda Version](lambda-version/README.md) - this version is fully automated but no container image
+* [ECR Version](ecr-lambda-version/README.md) - this version pushes an image into ECR and lambda will use that image
+* [Kubernetes Version](k8s-version/README.md) - this version uses kubectl and EKS for creating the endpoint

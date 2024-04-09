@@ -1,7 +1,7 @@
-# ontra-api
+# unix-time-api
 
 ## Introduction
-This version was what I initially created then I read the code had to be containerized. Left this version as it is the only one that is fully automated.
+This version is the lightest and fastest way to get this deployed in AWS.
 
 ## Components
 Terraform is structured in 2 main folders

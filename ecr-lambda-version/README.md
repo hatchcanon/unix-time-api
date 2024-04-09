@@ -1,7 +1,7 @@
-# ontra-api
+# unix-time-api
 
 ## Introduction
-This version technically fulfills all requirements of completing the API while containerizing the code. It accomplishes this similiarly to the lambda version with the exception of the lambda package being an image instead of a zip file.
+This version is very similar to the lambda version but the lambda uses an ECR image instead of a zip file.
 
 ## Tools
 * Terraform v1.6
